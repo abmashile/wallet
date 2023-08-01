@@ -1,0 +1,9 @@
+# Wallet 
+
+### Instructions
+
+* install docker compose
+* run 'docker-compose up' from terminal
+* run 'mvn clean install'
+* run 'mvn spring-boot:run'
+* use Testing.postman_collection.json for you postman

@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:alpine3.18
+    container_name: postgres_test
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=theP@ss
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabitmq-test
+    restart: always
+    volumes:
+      - ./docker/definitions.json:/etc/rabbitmq/definitions.json
+      - ./docker/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+volumes:
+  postgres:
+    driver: local
+    name: postgres-volume
